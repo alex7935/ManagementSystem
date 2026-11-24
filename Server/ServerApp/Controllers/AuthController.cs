@@ -2,10 +2,13 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using ServerApp.Models;
 
 namespace ServerApp.Controllers;
+
+public record ApiLoginDto(string Email, string Password);
 
 public class AuthController : Controller
 {
@@ -48,6 +51,20 @@ public class AuthController : Controller
     {
         Response.Cookies.Delete("AdminJwtToken");
         return Redirect("/auth/login");
+    }
+
+    // Ендпоінт аутентифікації користувачів (викладачів із БД) для мобільного додатку
+    [HttpPost("/api/auth/login")]
+    public async Task<IActionResult> ApiLogin([FromBody] ApiLoginDto dto)
+    {
+        var teacher = await _context.Teachers.FirstOrDefaultAsync(t => t.Email == dto.Email);
+        if (teacher == null || !BCrypt.Net.BCrypt.Verify(dto.Password, teacher.PasswordHash))
+        {
+            return Unauthorized(new { message = "Невірний email або пароль" });
+        }
+
+        var token = GenerateJwtToken(teacher.Email, "Teacher", teacher.ID);
+        return Ok(new { token, teacher.ID, teacher.Name, teacher.Email });
     }
 
     private string GenerateJwtToken(string name, string role, int userId)
