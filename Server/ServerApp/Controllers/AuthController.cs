@@ -1,8 +1,7 @@
-﻿using System.IdentityModel.Tokens.Jwt;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using ServerApp.Models;
 
@@ -13,7 +12,6 @@ public class AuthController : Controller
     private readonly IConfiguration _config;
     private readonly AppDbContext _context;
 
-    // Дані адміністратора зашиті в коді за умовою Завдання 4
     private const string AdminUsername = "admin";
     private const string AdminPassword = "admin123";
 
@@ -24,10 +22,7 @@ public class AuthController : Controller
     }
 
     [HttpGet("/auth/login")]
-    public IActionResult Login()
-    {
-        return View();
-    }
+    public IActionResult Login() => View();
 
     [HttpPost("/auth/login")]
     public IActionResult Login(string username, string password)
