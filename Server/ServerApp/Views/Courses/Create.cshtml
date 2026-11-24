@@ -1,0 +1,15 @@
+@model ServerApp.Models.Course
+@{ ViewData["Title"] = "Новий курс"; }
+<h2>Додати курс</h2>
+<form method="post">
+    <div class="mb-3"><label>Назва</label><input name="Name" class="form-control" required /></div>
+    <div class="mb-3"><label>Опис</label><input name="Description" class="form-control" /></div>
+    <div class="mb-3"><label>Семестр</label><input name="Semester" class="form-control" required /></div>
+    <div class="mb-3"><label>Викладач</label>
+        <select name="TeacherID" class="form-select">
+            @foreach (var item in (SelectList)ViewBag.Teachers) { <option value="@item.Value">@item.Text</option> }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Зберегти</button>
+    <a href="/Courses" class="btn btn-secondary">Скасувати</a>
+</form>

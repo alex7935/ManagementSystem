@@ -1,0 +1,10 @@
+@model ServerApp.Models.Teacher
+@{ ViewData["Title"] = "Новий викладач"; }
+<h2>Додати викладача</h2>
+<form method="post">
+    <div class="mb-3"><label>Ім'я</label><input name="Name" class="form-control" required /></div>
+    <div class="mb-3"><label>Email</label><input name="Email" type="email" class="form-control" required /></div>
+    <div class="mb-3"><label>Пароль</label><input name="plainPassword" type="password" class="form-control" required /></div>
+    <button type="submit" class="btn btn-primary">Зберегти</button>
+    <a href="/Teachers" class="btn btn-secondary">Скасувати</a>
+</form>

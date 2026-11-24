@@ -1,0 +1,20 @@
+@model IEnumerable<ServerApp.Models.Proposal>
+@{ ViewData["Title"] = "Пропозиції"; }
+<div class="d-flex justify-content-between mb-3">
+    <h2>Пропозиції щодо курсів</h2>
+    <a class="btn btn-success" href="/Proposals/Create">+ Додати пропозицію</a>
+</div>
+<table class="table table-bordered table-striped">
+    <thead><tr><th>ID</th><th>Викладач</th><th>Назва курсу</th><th>Тип</th><th>Статус</th><th>Дії</th></tr></thead>
+    <tbody>
+    @foreach (var p in Model) {
+        <tr>
+            <td>@p.ID</td><td>@p.Teacher?.Name</td><td>@p.CourseName</td><td>@p.ProposalType</td><td>@p.Status</td>
+            <td>
+                <a class="btn btn-sm btn-warning" href="/Proposals/Edit/@p.ID">Редагувати</a>
+                <a class="btn btn-sm btn-danger" href="/Proposals/Delete/@p.ID">Видалити</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

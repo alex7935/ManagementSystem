@@ -1,0 +1,29 @@
+@model ServerApp.Models.Proposal
+@{ ViewData["Title"] = "Редагувати пропозицію"; }
+<h2>Редагувати пропозицію</h2>
+<form method="post">
+    <input type="hidden" name="ID" value="@Model.ID" />
+    <div class="mb-3"><label>Викладач</label>
+        <select name="TeacherID" class="form-select">
+            @foreach (var item in (SelectList)ViewBag.Teachers) {
+                <option value="@item.Value" selected="@(item.Value == Model.TeacherID.ToString())">@item.Text</option>
+            }
+        </select>
+    </div>
+    <div class="mb-3"><label>Назва курсу</label><input name="CourseName" value="@Model.CourseName" class="form-control" required /></div>
+    <div class="mb-3"><label>Тип пропозиції</label>
+        <select name="ProposalType" class="form-select">
+            <option value="Create" selected="@(Model.ProposalType == "Create")">Create</option>
+            <option value="Delete" selected="@(Model.ProposalType == "Delete")">Delete</option>
+        </select>
+    </div>
+    <div class="mb-3"><label>Статус</label>
+        <select name="Status" class="form-select">
+            <option value="Pending" selected="@(Model.Status == "Pending")">Pending</option>
+            <option value="Approved" selected="@(Model.Status == "Approved")">Approved</option>
+            <option value="Rejected" selected="@(Model.Status == "Rejected")">Rejected</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Оновити</button>
+    <a href="/Proposals" class="btn btn-secondary">Скасувати</a>
+</form>

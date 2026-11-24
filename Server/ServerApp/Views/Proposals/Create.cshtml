@@ -1,0 +1,19 @@
+@model ServerApp.Models.Proposal
+@{ ViewData["Title"] = "Нова пропозиція"; }
+<h2>Додати пропозицію</h2>
+<form method="post">
+    <div class="mb-3"><label>Викладач</label>
+        <select name="TeacherID" class="form-select">
+            @foreach (var item in (SelectList)ViewBag.Teachers) { <option value="@item.Value">@item.Text</option> }
+        </select>
+    </div>
+    <div class="mb-3"><label>Назва курсу</label><input name="CourseName" class="form-control" required /></div>
+    <div class="mb-3"><label>Тип пропозиції</label>
+        <select name="ProposalType" class="form-select"><option value="Create">Create</option><option value="Delete">Delete</option></select>
+    </div>
+    <div class="mb-3"><label>Статус</label>
+        <select name="Status" class="form-select"><option value="Pending">Pending</option><option value="Approved">Approved</option><option value="Rejected">Rejected</option></select>
+    </div>
+    <button type="submit" class="btn btn-primary">Зберегти</button>
+    <a href="/Proposals" class="btn btn-secondary">Скасувати</a>
+</form>

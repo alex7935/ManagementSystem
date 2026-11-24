@@ -1,0 +1,20 @@
+@model IEnumerable<ServerApp.Models.Teacher>
+@{ ViewData["Title"] = "Викладачі"; }
+<div class="d-flex justify-content-between mb-3">
+    <h2>Викладачі</h2>
+    <a class="btn btn-success" href="/Teachers/Create">+ Додати викладача</a>
+</div>
+<table class="table table-bordered table-striped">
+    <thead><tr><th>ID</th><th>Ім'я</th><th>Email</th><th>Дії</th></tr></thead>
+    <tbody>
+    @foreach (var t in Model) {
+        <tr>
+            <td>@t.ID</td><td>@t.Name</td><td>@t.Email</td>
+            <td>
+                <a class="btn btn-sm btn-warning" href="/Teachers/Edit/@t.ID">Редагувати</a>
+                <a class="btn btn-sm btn-danger" href="/Teachers/Delete/@t.ID">Видалити</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
