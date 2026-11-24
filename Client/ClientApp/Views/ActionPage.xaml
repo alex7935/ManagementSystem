@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ClientApp.ViewModels"
+             x:Class="ClientApp.Views.ActionPage"
+             Title="Нова пропозиція">
+    <ContentPage.BindingContext>
+        <vm:ActionViewModel />
+    </ContentPage.BindingContext>
+    <VerticalStackLayout Padding="25" Spacing="15">
+        <Label Text="Подача пропозиції (Create / Delete)" FontSize="18" FontAttributes="Bold" />
+        <Entry Placeholder="Назва курсу" Text="{Binding CourseName}" />
+        <Picker Title="Тип пропозиції" SelectedItem="{Binding ProposalType}">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Create</x:String>
+                    <x:String>Delete</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+        <Button Text="Відправити пропозицію" Command="{Binding SubmitProposalCommand}" />
+        <Label Text="{Binding ResultMessage}" TextColor="Green" HorizontalOptions="Center" />
+    </VerticalStackLayout>
+</ContentPage>

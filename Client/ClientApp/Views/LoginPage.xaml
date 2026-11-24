@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ClientApp.ViewModels"
+             x:Class="ClientApp.Views.LoginPage"
+             Title="Вхід для викладача">
+    <ContentPage.BindingContext>
+        <vm:LoginViewModel />
+    </ContentPage.BindingContext>
+    <VerticalStackLayout Padding="30" Spacing="15" VerticalOptions="Center">
+        <Label Text="Університет | Кабінет викладача" FontSize="22" FontAttributes="Bold" HorizontalOptions="Center" />
+        <Entry Placeholder="Email" Text="{Binding Email}" Keyboard="Email" />
+        <Entry Placeholder="Пароль" Text="{Binding Password}" IsPassword="True" />
+        <Button Text="Увійти" Command="{Binding LoginCommand}" />
+        <Label Text="{Binding StatusMessage}" TextColor="Red" HorizontalOptions="Center" />
+    </VerticalStackLayout>
+</ContentPage>
